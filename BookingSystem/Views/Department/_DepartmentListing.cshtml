@@ -1,0 +1,103 @@
+﻿@model IEnumerable<BookingSystem.ViewModel.DepartmentViewModel>
+<style>
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    button:active {
+        border: none;
+    }
+
+
+
+    .heading {
+        height: 40px;
+        
+        text-align: left;
+        border: 1px solid;
+        border-color: darkgray;
+        background-color: #eeeeee;
+        font-family: Calibri;
+        font-size: 17px;
+        font-weight: bold;
+        padding-top: 5px;
+    }
+
+    .column {
+        height: 40px;
+        text-align: left;
+        text-align: center;
+        border: 1px solid;
+        border-color: darkgray;
+        background-color: #eeeeee;
+        font-family: Calibri;
+        font-size: 17px;
+        padding-top: 10px
+    }
+
+    .header-left {
+        border-left: none;
+    }
+
+    .tablerow {
+        height: 40px;
+        text-align: left;
+        
+        border: 1px solid;
+        border-color: #eeeeee;
+        background-color: white;
+        font-family: Calibri;
+        font-size: 15px;
+    }
+
+    .searchbox {
+        height: 30px;
+        width: 30px;
+    }
+
+    button {
+        background-color: white;
+        border: none;
+    }
+</style>
+<div class="container" style="width:100%;padding-left:0px;padding-top:20px">
+    <div class="row form-group">
+
+        <div class="col-md-2">
+
+            <button><img src="~/Images/Add.png" onclick="CreateDepartment()" /></button>
+            @*<button><img src="~/Images/Delete.png" style="margin-left:30px" /></button>
+            <button><img src="~/Images/Excel.png" style="margin-left:30px" /></button>*@
+        </div>
+        
+
+    </div>
+    <div class="row ">
+        <div class="col-md-4 heading header-left">
+            @Html.DisplayNameFor(model => model.DepartmentCode)
+        </div>
+        <div class="col-md-4 heading header-left">
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </div>
+        <div class="col-md-4 heading">
+            @Html.DisplayNameFor(model => model.Active)
+        </div>
+
+    </div>
+    @foreach (var item in Model)
+    {
+    <div class="row ">
+        <div class="col-md-4 tablerow column header-left">
+            @Html.DisplayFor(modelItem => item.DepartmentCode)
+        </div>
+        <div class="col-md-4 tablerow column header-left">
+            @Html.DisplayFor(modelItem => item.DepartmentName)
+        </div>
+        <div class="col-md-4 tablerow column">
+            @Html.DisplayFor(modelItem => item.Active)
+        </div>
+
+    </div>
+    }
+</div>

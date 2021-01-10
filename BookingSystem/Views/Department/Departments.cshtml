@@ -1,0 +1,31 @@
+﻿@model BookingSystem.ViewModel.DepartmentViewModel
+
+@{
+    ViewBag.Title = "Departments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        DepartmentListing();
+    });
+    function DepartmentListing() {
+        $('#DepartmentDiv').load('@Url.Action("_DepartmentListing","Department")');
+    }
+    function CreateDepartment() {
+        $('#DepartmentDiv').load('@Url.Action("_CreateDepartment","Department")');
+    }
+</script>
+
+<div class="container-fluid" style="width:100%;padding-top:30px">
+    <div class="row" style="padding-left:10px;padding-top:10px">
+        <h3 style="font-weight:bold">Department</h3>
+
+    </div>
+    <div class="container" id="DepartmentDiv" style="width:100%;padding-left:0px">
+
+
+    </div>
+</div>
+
+

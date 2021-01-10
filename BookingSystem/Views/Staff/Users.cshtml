@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BookingSystem.ViewModel.StaffViewModel>
+@{
+    ViewBag.Title = "Users";
+    Layout= "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        UserListing();
+    });
+    function AddUser() {
+      
+        var UserModel = new Object();
+        UserModel.UserName = $('#txtUserName').val();
+        UserModel.FullName = $('#txtFullName').val();
+        UserModel.Password = $('#txtPassword').val();
+        UserModel.UserRole = $('#UserRole option:selected').val();
+        UserModel.DepartmentId = $('#Department option:selected').val();
+        console.log(UserModel);
+        var UserObj = JSON.stringify(UserModel);
+        console.log(UserObj);
+        $.ajax({
+            url: "@Url.Action("AddUser", "Staff")",
+            type: 'POST',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: UserObj,
+            success: function (data) {
+                if (data.success) {
+                    alert(data.message);
+                    $('#UserDiv').load('@Url.Action("_UserListing","Staff")');
+                }
+                else {
+                    alert(data.message);
+                     $('#UserDiv').load('@Url.Action("_UserListing","Staff")');
+                }
+            }
+        })
+    }
+    function UserListing() {
+        $('#UserDiv').load('@Url.Action("_UserListing","Staff")');
+    }
+    function CreateUser() {
+        $('#UserDiv').load('@Url.Action("_CreateUser","Staff")');
+    }
+</script>
+
+<div class="container-fluid" style="width:100%;padding-top:30px">
+    <div class="row" style="padding-left:10px;padding-top:10px">
+        <h3 style="font-weight:bold">Users</h3>
+
+    </div>
+    <div class="container" id="UserDiv" style="width:100%;padding-left:0px">
+
+
+    </div>
+ </div>
+
+   
+ 

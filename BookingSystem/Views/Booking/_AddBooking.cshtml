@@ -1,0 +1,117 @@
+﻿@model BookingSystem.ViewModel.BookingViewModel
+<style>
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    button {
+        background-color: white;
+        border: none;
+    }
+
+        button:active {
+            border: none;
+        }
+
+    .myDiv {
+        padding-top: 20px;
+        background-color: #eeeeee;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: darkgray;
+    }
+
+    .mylabel {
+        margin-left: 10px;
+        margin-top:20px;
+    }
+</style>
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="width:100%;margin-left:0px; padding-top:20px">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-6">
+                <button onclick="CreateBooking()"><img src="~/Images/save.jpg" /></button>
+                <button style="margin-left:30px"><img src="~/Images/refresh.png" /></button>
+                <button style="margin-left:30px"><img src="~/Images/return.png" /></button>
+
+            </div>
+
+        </div>
+        <div class="form-group" style="padding-top:20px;background-color:#eeeeee">
+            <div class="form-group hidden">
+                @Html.LabelFor(model => model.BookingDate, htmlAttributes: new { @class = "col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.BookingDate, new { htmlAttributes = new { @class = "form-control mylabel", @Value = ViewBag.BookingDate,@id="txtBookingDate" } })
+                    @*@Html.ValidationMessageFor(model => model.BookingDate, "", new { @class = "text-danger" })*@
+                  
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control mylabel",@id="txtStartTime"} })
+                    @Html.ValidationMessageFor(model => model.StartTime,"", new { @class = "text-danger" })
+                  
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control mylabel",@id="txtEndTime" } })
+                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MeetingDescription, htmlAttributes: new { @class = "col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MeetingDescription, new { htmlAttributes = new { @class = "form-control mylabel",@id="txtMeetingDescription"} })
+                    @Html.ValidationMessageFor(model => model.MeetingDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
+            <div class="form-group hidden">
+                @Html.LabelFor(model => model.MeetingRoomId, htmlAttributes: new { @class = "col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MeetingRoomId, new { htmlAttributes = new { @class = "form-control mylabel" ,@id="txtMeetingRoomId"} })
+                    @Html.ValidationMessageFor(model => model.MeetingRoomId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group hidden">
+                @Html.LabelFor(model => model.StaffId, htmlAttributes: new { @class = "col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.StaffId, new { htmlAttributes = new { @class = "form-control mylabel",@Value=ViewBag.staffId ,@id="txtStaffId"} })
+                    @Html.ValidationMessageFor(model => model.StaffId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attendees, htmlAttributes: new { @class = " col-md-2 mylabel" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Attendees, new { htmlAttributes = new { @class = "form-control mylabel",@id="txtAttendees" } })
+                    @Html.ValidationMessageFor(model => model.Attendees, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtStartTime').datepicker();
+</script>

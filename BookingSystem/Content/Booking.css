@@ -1,0 +1,80 @@
+﻿.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    height:auto;
+    position:fixed;
+    top:0;
+}
+img{
+    max-height:100%;
+    max-width:100%;
+}
+.navbar {
+    background-color: #007ccc;
+   
+}
+.logo-header {
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+    border-right: solid 1px;
+    border-color: white;
+    overflow-x: hidden;
+    background-color: #007ccc;
+}
+.logininfo {
+    height: 50px;
+    width: 160px;
+    position: fixed;
+    top: 0;
+    right:0;
+    border-left: solid 1px;
+    border-color: white;
+    overflow-x: hidden;
+    background-color: #007ccc;
+}
+.sidenav{
+    height: 100%;
+  
+    position: fixed;
+    top: 50px;
+    border-right: solid 1px;
+    border-color: darkgray;
+    overflow-x: hidden;
+    background-color:	#eeeeee;
+    margin:0px;
+}
+
+
+.menulist{
+    width:100%;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:30px;
+    font-family:Calibri;
+    font-size:20px; 
+    margin:0px;
+}
+.menulist:hover{
+    background-color:white;
+}
+
+span.Logo {
+    color: white;
+    font-family: cursive;
+    font-size: 25px;
+    padding-left: 20px;
+}
+span.User{
+     color:white;
+     font-family:Calibri;
+     font-weight:bold;
+}
+.navbar-inverse {
+    border-color: #007ccc;
+}
+

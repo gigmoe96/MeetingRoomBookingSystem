@@ -1,0 +1,94 @@
+﻿@model IEnumerable<BookingSystem.ViewModel.MeetingRoomViewModel>
+
+@{
+    ViewBag.Title = "BookRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<script type="text/javascript">
+
+    function BookingDetail(RoomId) {
+        console.log("I am here");
+        var BookingDate = $('#BookingDate').val();
+        console.log(BookingDate);
+        var meetingRoomId = RoomId;
+        var staffId=@ViewBag.StaffId;
+        console.log(meetingRoomId);
+        @*@Url.Action("BookingDetail", "Booking"), new { bookingdate: BookingDate, roomname: meetingRoomName }*@
+        window.location.href = '@Url.Action("BookingDetail","Booking")' + '?BookingDate=' + BookingDate + '&meetingRoomId=' + meetingRoomId + '&staffId=' + staffId;
+    }
+
+</script>
+<style>
+    .DateDiv {
+        height: 60px;
+        text-align: left;
+        border: 1px solid;
+        border-color: darkgray;
+        background-color: #eeeeee;
+        font-family: Calibri;
+        font-size: 17px;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-left: 30px;
+    }
+
+    .RoomDiv {
+        height: 110px;
+        text-align: left;
+        border: 1px solid;
+        border-color: darkgray;
+        background-color: #eeeeee;
+        font-family: Calibri;
+        font-size: 17px;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-left: 20px;
+        margin-left:10px;
+        margin-top:20px;
+        border-radius:8px;
+    }
+
+    .header-left {
+        border-left: none;
+    }
+</style>
+
+<div class="container-fluid" style="width:100%;padding-top:30px;">
+    <div class="row" style="padding-left:10px;padding-top:10px">
+        <h3 style="font-weight:bold">Book Room</h3>
+
+    </div>
+
+    <div class="row" style="width:100%;padding-left:0px;padding-top:20px">
+        <div class="DateDiv header-left">
+            @Html.TextBox("Date", DateTime.Today.ToLongDateString(), new { @id = "BookingDate", @style = "border:none;background-color:#eeeeee;width:400px" })
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+     <div class="col-md-6" style="width:550px;">
+         <div class="RoomDiv" onclick="BookingDetail(@item.MeetingRoomId)" >
+
+             @Html.TextBoxFor(modelItem => item.MeetingRoomName, new { @id = "meetingRoomName", @style = "border:none;background-color:#eeeeee;width:400px" })
+             @Html.TextBoxFor(modelItem => item.MeetingRoomId, new { @id = "meetingRoomId"+item, @class="hidden"})
+
+
+
+             <div>
+                 @Html.Label("Room Capacity:")
+                 @Html.DisplayFor(modeItem => item.RoomCapacity)
+                 @Html.Label(" people")
+             </div>
+             <div>
+                 @Html.Label("Projector:")
+                 @(item.Projector ? "Provided" : "Not Provided")
+             </div>
+
+         </div>
+     </div>
+        
+    }
+
+</div>

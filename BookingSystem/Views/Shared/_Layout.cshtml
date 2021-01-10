@@ -1,0 +1,76 @@
+﻿@using BookingSystem.ViewModel;
+<!DOCTYPE html>
+@{
+    var accountSession = new AccountSession();
+    if (Session["AccountSession"] != null && ((AccountSession)Session["AccountSession"]).StaffLogIn != null)
+    {
+        accountSession = (AccountSession)Session["AccountSession"];
+    }
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerydatetimepicker")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <div class="col-md-2 logo-header">
+
+                    <span class="Logo">Company Logo</span>
+                </div>
+                <div class="logininfo">
+                    
+                    <span class="User" style="font-size:20px">@accountSession.StaffLogIn.FullName</span>
+                </div>
+                
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <div class="container-fluid" style="width:100%">
+     
+        <div class="col-md-2 sidenav ">
+
+            <div class="menulist">
+                @Html.ActionLink("Booking", "BookRoom","Booking",new { StaffId = accountSession.StaffLogIn.StaffId },null)
+            </div>
+            <div class="menulist">
+                @Html.ActionLink("Meeting Room", "MeetingRooms", "MeetingRoom")
+            </div>
+            <div class="menulist">
+                @Html.ActionLink("User", "Users", "Staff")
+            </div>
+            <div class="menulist">
+                @Html.ActionLink("Department", "Departments", "Department")
+            </div>
+
+            <div class="menulist">
+                @Html.ActionLink("Detail Report", "BookingDetailReport", "Booking")
+            </div>
+
+        </div>
+            <div class="col-md-10 col-md-offset-2">
+                @RenderBody()
+
+            </div>
+        
+    </div>
+
+ 
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

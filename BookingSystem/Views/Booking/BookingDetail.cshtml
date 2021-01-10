@@ -1,0 +1,106 @@
+﻿@model BookingSystem.ViewModel.MeetingRoomViewModel
+
+@{
+    ViewBag.Title = "BookingDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        
+            $('#AddBooking').load('@Html.Raw( @Url.Action("_AddBooking","Booking",new { meetingRoomId = Model.MeetingRoomId ,BookingDate=Model.BookingDate,StaffId=Model.StaffId}))');
+        @*$('#AddBooking').load('@Url.Action("_AddBooking", "Booking") ') + ' ? BookingDate = ' + @Model.BookingDate + ' & meetingRoomId=' +@Model.MeetingRoomId ;*@
+
+
+            $('#BookingSummary').load('@Html.Raw( @Url.Action("_BookingSummary","Booking",new { meetingRoomId = Model.MeetingRoomId ,BookingDate=Model.BookingDate}))');
+            
+               
+    });
+    function CreateBooking() {
+        var BookingModel = new Object();
+        BookingModel.BookingDate = $('#txtBookingDate').val();
+        BookingModel.StartTime = $('#txtStartTime').val();
+        BookingModel.EndTime = $('#txtEndTime').val();
+        BookingModel.Attendees = $('#txtAttendees').val();
+        BookingModel.MeetingDescription = $('#txtMeetingDescription').val();
+        BookingModel.StaffId = $('#txtStaffId').val();
+        BookingModel.MeetingRoomId = $('#txtMeetingRoomId').val();
+        BookingModel.ExtendedTime = $('#txtEndTime').val();
+        console.log(BookingModel);
+        var TimeValid = TimeTestWithCurrentTime(BookingModel.StartTime);
+        if (TimeValid) {
+            var Valid = DateTest(BookingModel.StartTime, BookingModel.EndTime);
+            if (Valid) {
+                var BookingObj = JSON.stringify(BookingModel);
+                console.log(BookingObj);
+                $.ajax({
+                    url: "@Url.Action("CreateBooking","Booking")",
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: BookingObj,
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.message);
+                            $('#AddBooking').load('@Html.Raw( @Url.Action("_AddBooking","Booking",new { meetingRoomId = Model.MeetingRoomId ,BookingDate=Model.BookingDate,StaffId=Model.StaffId}))');
+                            $('#BookingSummary').load('@Html.Raw( @Url.Action("_BookingSummary","Booking",new { meetingRoomId = Model.MeetingRoomId ,BookingDate=Model.BookingDate}))');
+                            
+                        }
+                        else {
+                            alert(data.message);
+                             $('#AddBooking').load('@Html.Raw( @Url.Action("_AddBooking","Booking",new { meetingRoomId = Model.MeetingRoomId ,BookingDate=Model.BookingDate,StaffId=Model.StaffId}))');
+                            $('#BookingSummary').load('@Html.Raw( @Url.Action("_BookingSummary","Booking",new { meetingRoomId = Model.MeetingRoomId ,BookingDate=Model.BookingDate}))');
+                        }
+                    }
+
+                })
+            }
+           
+        }
+       
+    }
+    function TimeTestWithCurrentTime(BookingStartTime) {
+        var validBooking = false;
+        var todayDate = new Date();
+        var currentTime = $.now();
+        if (Date.parse(BookingStartTime) > Date.parse(todayDate)) {
+            console.log(Date.parse(BookingStartTime));
+            console.log(Date.parse(todayDate));
+            validBooking = true;
+        }
+        else {
+            validBooking = false;
+            alert("You cannot Book earlier than Current Time");
+        }
+        return validBooking;
+    }
+    function DateTest(StartTime, EndTime) {
+        var ValidBooking = false;
+        if (StartTime >= EndTime) {
+            alert("Booking End Time must not be earlier than Start Time");
+            ValidBooking = false;
+        }
+        else {
+            ValidBooking = true;
+        }
+        return ValidBooking;
+    }
+</script>
+<div class="container-fluid" style="width:100%;padding-top:30px">
+    <div class="col-md-8 row"  style="padding-left:10px;padding-top:10px">
+        <h3 style="font-weight:bold">Welcome to @Model.MeetingRoomName </h3>
+
+    </div>
+    <div class="col-md-4 row" style="padding-left:10px;padding-top:30px">
+        
+        @Html.TextBox("Date", Model.BookingDate.ToLongDateString(), new { @id = "BookingDate", @style = "border:none;font-size:18px;font-weight:bold" })
+    </div>
+    <div class="container"  style="width:100%">
+        <div class="col-md-5" id="AddBooking"></div>
+        <div class="col-md-7" id="BookingSummary"></div>
+
+    </div>
+</div>
+

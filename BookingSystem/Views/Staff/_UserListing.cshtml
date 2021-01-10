@@ -1,0 +1,119 @@
+﻿@model IEnumerable<BookingSystem.ViewModel.StaffViewModel>
+<style>
+    img{
+        width: 20px;
+        height: 20px;
+        
+    }
+    button:active{
+        border:none;
+    }
+
+        
+
+    .heading {
+        height: 40px;
+        text-align: left;
+      
+        border: 1px solid;
+        border-color: darkgray;
+        background-color: #eeeeee;
+        font-family: Calibri;
+        font-size: 17px;
+        font-weight:bold;
+        padding-top:5px;
+        
+    }
+    .column {
+        height: 40px;
+        text-align: left;
+        text-align: center;
+        border: 1px solid;
+        border-color: darkgray;
+        background-color: #eeeeee;
+        font-family: Calibri;
+        font-size: 17px;
+        padding-top:10px
+    }
+
+    .header-left {
+        border-left: none;
+    }
+
+    .tablerow {
+        height: 40px;
+        text-align: left;
+       
+        border: 1px solid;
+        border-color: #eeeeee;
+        background-color: white;
+        font-family: Calibri;
+        font-size: 15px;
+    }
+
+    .searchbox {
+        height: 30px;
+        width: 30px;
+    }
+    button{
+        background-color:white;
+        border:none;
+    }
+</style>
+<div class="container" style="width:100%;padding-left:0px;padding-top:20px">
+    <div class="row form-group">
+
+        <div class="col-md-2">
+
+            <button><img src="~/Images/Add.png"  onclick="CreateUser()" /></button>
+            @*<button><img src="~/Images/Delete.png"  style="margin-left:30px" /></button>
+            <button><img src="~/Images/Excel.png"  style="margin-left:30px" /></button>*@
+        </div>
+        <div class="col-md-2 col-offset-10" style="padding-left:0px">
+            @Html.Editor("UserName")
+            <img src="~/Images/Search.png" class="searchbox" style="padding-left:0px"  />
+        </div>
+
+    </div>
+    <div class="row ">
+        <div class="col-md-2 heading header-left">
+            @Html.DisplayNameFor(model => model.UserName)
+        </div>
+        <div class="col-md-2 heading">
+            @Html.DisplayNameFor(model => model.FullName)
+
+        </div>
+        <div class="col-md-2 heading">
+            @Html.DisplayNameFor(model => model.Password)
+        </div>
+        <div class="col-md-2 heading">
+            @Html.DisplayNameFor(model => model.UserRole)
+        </div>
+        <div class="col-md-2 heading">
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </div>
+
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row ">
+            <div class="col-md-2 tablerow column header-left">
+                @Html.DisplayFor(modelItem => item.UserName)
+            </div>
+            <div class="col-md-2 tablerow column">
+                @Html.DisplayFor(modelItem => item.FullName)
+
+            </div>
+            <div class="col-md-2 tablerow column">
+                @Html.DisplayFor(modelItem => item.Password)
+            </div>
+            <div class="col-md-2 tablerow column">
+                @Html.DisplayFor(modelItem => item.UserRole)
+            </div>
+            <div class="col-md-2 tablerow column">
+                @Html.DisplayFor(modelItem => item.DepartmentId)
+            </div>
+
+        </div>
+    }
+</div>

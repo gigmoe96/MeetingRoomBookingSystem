@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BookingSystem.ViewModel.BookingViewModel>
+    <style>
+        .heading {
+            height: 40px;
+            text-align: left;
+            border: 1px solid;
+            border-color: darkgray;
+            background-color: #eeeeee;
+            font-family: Calibri;
+            font-size: 17px;
+            font-weight: bold;
+            padding-top: 5px;
+        }
+
+        .column {
+            height: 40px;
+            text-align: left;
+            text-align: center;
+            border: 1px solid;
+            border-color: darkgray;
+            background-color: #eeeeee;
+            font-family: Calibri;
+            font-size: 17px;
+            padding-top: 10px
+        }
+
+        .header-left {
+            border-left: none;
+        }
+
+        .tablerow {
+            height: 40px;
+            text-align: left;
+            border: 1px solid;
+            border-color: #eeeeee;
+            background-color: white;
+            font-family: Calibri;
+            font-size: 15px;
+        }
+        .editbooking{
+            color:aqua;
+            font-weight:bold;
+        }
+
+    </style>
+
+<div class="container" style="width:100%;padding-left:0px;padding-top:58px">
+   
+    <div class="row ">
+        <div class="col-md-3 heading header-left">
+            @Html.DisplayNameFor(model => model.MeetingDescription)
+        </div>
+        <div class="col-md-3 heading header-left">
+            @Html.DisplayNameFor(model => model.StartTime)
+        </div>
+        <div class="col-md-3 heading">
+            @Html.DisplayNameFor(model => model.EndTime)
+        </div>
+
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row ">
+            <div class="col-md-3 tablerow column header-left">
+                @Html.DisplayFor(modelItem => item.MeetingDescription, new {@class="editbooking",@style="color:aqua"})
+            </div>
+            <div class="col-md-3 tablerow column header-left">
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </div>
+            <div class="col-md-3 tablerow column">
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </div>
+
+        </div>
+    }
+</div>

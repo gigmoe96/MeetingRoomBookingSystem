@@ -1,0 +1,31 @@
+﻿@model BookingSystem.ViewModel.MeetingRoomViewModel
+
+@{
+    ViewBag.Title = "MeetingRooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        MeetingRoomListing();
+    });
+    function MeetingRoomListing() {
+        $('#MeetingRoomDiv').load('@Url.Action("_MeetingRoomListing","MeetingRoom")');
+    }
+    function CreateMeetingRoom() {
+        $('#MeetingRoomDiv').load('@Url.Action("_CreateMeetingRoom","MeetingRoom")');
+    }
+</script>
+
+<div class="container-fluid" style="width:100%;padding-top:30px">
+    <div class="row" style="padding-left:10px;padding-top:10px">
+        <h3 style="font-weight:bold">Meeting Room</h3>
+
+    </div>
+    <div class="container" id="MeetingRoomDiv" style="width:100%;padding-left:0px">
+
+
+    </div>
+</div>
+
+
